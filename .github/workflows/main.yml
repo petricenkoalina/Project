@@ -1,4 +1,4 @@
-name: SonarQube Analysis
+name: SonarQube
 
 on:
   push:
@@ -8,14 +8,27 @@ on:
 
 jobs:
   sonarqube:
-    runs-on: self-hosted
+    runs-on: [self-hosted, local]
+
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Sonar Scan
-        uses: sonarsource/sonarqube-scan-action@master
+      - name: Check SonarQube availability
+        shell: powershell
+        run: |
+          curl.exe -sS $env:SONAR_HOST_URL/api/system/status
+
+      - name: Run SonarScanner
+        shell: powershell
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        run: |
+          sonar-scanner `
+            -Dsonar.projectKey=My-Project `
+            -Dsonar.sources=. `
+            -Dsonar.host.url=$env:SONAR_HOST_URL `
+            -Dsonar.token=$env:SONAR_TOKEN
