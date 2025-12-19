@@ -1,0 +1,11 @@
+﻿{
+  "agentId": 2,
+  "agentName": "Alina",
+  "poolId": 1,
+  "poolName": "Default",
+  "serverUrl": "https://pipelinesghubeus4.actions.githubusercontent.com/n8SP7pPAqE5PJUJcdpxfDInXDQiXWrio4GtTXRFPocWsgqLjix/",
+  "gitHubUrl": "https://github.com/petricenkoalina/Project",
+  "workFolder": "_work",
+  "useV2Flow": true,
+  "serverUrlV2": "https://broker.actions.githubusercontent.com/"
+}

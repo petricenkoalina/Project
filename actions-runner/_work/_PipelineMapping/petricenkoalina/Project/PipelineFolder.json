@@ -1,0 +1,12 @@
+﻿{
+  "repositoryName": "petricenkoalina/Project",
+  "pipelineDirectory": "Project",
+  "workspaceDirectory": "Project\\Project",
+  "repositories": {
+    "petricenkoalina/Project": {
+      "repositoryPath": "Project\\Project",
+      "lastRunOn": "12/19/2025 19:42:03 +02:00"
+    }
+  },
+  "lastRunOn": "12/19/2025 19:42:03 +02:00"
+}
