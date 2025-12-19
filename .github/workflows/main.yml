@@ -18,8 +18,10 @@ jobs:
 
       - name: Check SonarQube availability
         shell: powershell
+        env:
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         run: |
-          curl.exe -sS $env:SONAR_HOST_URL/api/system/status
+          curl.exe -sS "$env:SONAR_HOST_URL/api/system/status"
 
       - name: Run SonarScanner
         shell: powershell
@@ -30,5 +32,5 @@ jobs:
           sonar-scanner `
             -Dsonar.projectKey=My-Project `
             -Dsonar.sources=. `
-            -Dsonar.host.url=$env:SONAR_HOST_URL `
-            -Dsonar.token=$env:SONAR_TOKEN
+            -Dsonar.host.url="$env:SONAR_HOST_URL" `
+            -Dsonar.token="$env:SONAR_TOKEN"
