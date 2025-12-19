@@ -1,7 +1,7 @@
 # GitHub self-hosted runner
 actions-runner/
 
-# SonarQube
+# SonarQube generated
 .scannerwork/
 .sonar/
 .sonar_lock
