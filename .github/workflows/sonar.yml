@@ -16,16 +16,28 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Check SonarQube availability
+      - name: Wait for SonarQube to be UP
         shell: powershell
         env:
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         run: |
-          curl.exe -sS "$env:SONAR_HOST_URL/api/system/status"
+          for ($i = 0; $i -lt 30; $i++) {
+            try {
+              $status = curl.exe -s "$env:SONAR_HOST_URL/api/system/status" | ConvertFrom-Json
+              if ($status.status -eq "UP") {
+                Write-Host "SonarQube is UP"
+                exit 0
+              }
+            } catch {}
+            Write-Host "Waiting for SonarQube..."
+            Start-Sleep -Seconds 5
+          }
+          Write-Error "SonarQube did not start"
+          exit 1
 
       - name: Run SonarScanner (uses sonar-project.properties)
         shell: powershell
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          sonar-scanner -Dsonar.token="$env:SONAR_TOKEN"
+          sonar-scanner
