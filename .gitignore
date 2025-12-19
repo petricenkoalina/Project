@@ -1,0 +1,10 @@
+# GitHub self-hosted runner
+actions-runner/
+
+# SonarQube
+.scannerwork/
+.sonar/
+.sonar_lock
+
+# Logs
+*.log
